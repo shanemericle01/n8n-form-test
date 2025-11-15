@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit to n8n Webhook</title>
+</head>
+<body>
+  <h2>Contact Form – Send to n8n + Airtable</h2>
+
+  <form id="contactForm">
+    <label>
+      Name:
+      <input name="name" placeholder="Your Name" required>
+    </label><br><br>
+
+    <label>
+      Email:
+      <input name="email" type="email" placeholder="you@example.com" required>
+    </label><br><br>
+
+    <label>
+      Message:
+      <textarea name="message" placeholder="Your message here..." required></textarea>
+    </label><br><br>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      const webhookUrl = "https://your-n8n-domain/webhook/form-submission"; // ⬅️ Replace this!
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          alert("✅ Submitted successfully!");
+          form.reset();
+        } else {
+          const error = await res.text();
+          alert("❌ Failed to submit: " + error);
+        }
+      } catch (err) {
+        alert("❌ Error: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

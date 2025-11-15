@@ -37,7 +37,7 @@
         message: form.message.value
       };
 
-      const webhookUrl = "https://your-n8n-domain/webhook/form-submission"; // ⬅️ Replace this!
+      const webhookUrl = "https://your-n8n-domain/webhook/form-submission";
 
       try {
         const res = await fetch(webhookUrl, {

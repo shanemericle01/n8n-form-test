@@ -37,8 +37,8 @@
         message: form.message.value
       };
 
-      //const webhookUrl = "https://smericle.app.n8n.cloud/webhook-test/form-submission";
-      const webhookUrl = "https://smericle.app.n8n.cloud/webhook/form-submission";
+      //const webhookUrl = "https://smericle.app.n8n.cloud/webhook-test/form-submission"; //<-- test hook
+      const webhookUrl = "https://smericle.app.n8n.cloud/webhook/form-submission"; //<-- production hook
 
       try {
         const res = await fetch(webhookUrl, {
